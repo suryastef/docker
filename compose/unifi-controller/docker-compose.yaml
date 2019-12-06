@@ -4,9 +4,10 @@ services:
     image: linuxserver/unifi-controller
     container_name: unifi-controller
     environment:
-      - PUID=1000
-      - PGID=1000
-      - MEM_LIMIT=1024M #optional
+      - 'TZ=Asia/Jakarta'
+      - 'PUID=1000'
+      - 'PGID=1000'
+      - 'MEM_LIMIT=1024M'
     volumes:
       - ./config:/config
     ports:
