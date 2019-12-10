@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  unifi-controller:
+    image: portainer/portainer 
+    container_name: portainer
+    environment:
+      - 'TZ=Asia/Jakarta'
+      - 'PUID=1000'
+      - 'PGID=1000'
+      - 'MEM_LIMIT=1024M'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer_data:/data
+    ports:
+      - 8000:8000
+      - 9000:9000
+    restart: unless-stopped
+
