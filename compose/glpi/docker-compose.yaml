@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  mysql:
+    image: mysql:5.7.23
+    container_name: glpi-db
+    hostname: mysql
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - TIMEZONE=Asia/Jakarta
+      - MYSQL_ROOT_PASSWORD=strong_password
+      - MYSQL_DATABASE=glpi
+      - MYSQL_USER=glpi
+      - MYSQL_PASSWORD=glpi
+    restart: unless-stopped
+
+  glpi:
+    image: diouxx/glpi
+    container_name : glpi-app
+    hostname: glpi
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./glpi/:/var/www/html/glpi
+    environment:
+      - TIMEZONE=Asia/Jakarta
+    restart: unless-stopped
