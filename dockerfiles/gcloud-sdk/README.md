@@ -29,3 +29,8 @@ Start the container as usual, it will prompt gcloud authentication
 docker run -ti gcloud-sdk:buster-slim
 ```
 
+
+
+## Note
+
+I use the same installation tutorial from [cloud.google.com](https://cloud.google.com/sdk/docs/downloads-apt-get)
