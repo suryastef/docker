@@ -39,3 +39,4 @@ I use the same installation tutorial from [cloud.google.com](https://cloud.googl
 ## Next update
 
 - Run ```apt-get clean && apt-get autoclean``` to freed up space
+- Add  ```watchs``` package (same functional as watch but with color enhancement, from my repo)
