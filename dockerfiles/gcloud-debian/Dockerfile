@@ -22,9 +22,11 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.
 # Import the Google Cloud public key
 RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
 
-
 # Update and install the Cloud SDK
 RUN apt-get update && apt-get install -yq google-cloud-sdk
+
+# Install Oh My ZSH
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Revert Debian CLI to teletype important berfore running any command in debian based distro
 ENV DEBIAN_FRONTEND teletype
