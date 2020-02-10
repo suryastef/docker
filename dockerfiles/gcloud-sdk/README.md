@@ -19,7 +19,6 @@ This image include some packages:
     zsh
     oh-my-zsh
     powerline10k zsh theme
-
     ```
 
 ## Usages
