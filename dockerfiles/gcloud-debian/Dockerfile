@@ -28,9 +28,14 @@ RUN apt-get update && apt-get install -yq google-cloud-sdk kubectl
 # Install Oh My ZSH
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+# Add install powerlevel10k theme and enable additional plugins
+RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k
+RUN sed -i -e 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
+RUN echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >> ~/.zshrc
+RUN sed -i -e 's/(git)/(git kubectl gcloud)/g' ~/.zshrc
+
 # Revert Debian CLI to teletype important berfore running any command in debian based distro
 ENV DEBIAN_FRONTEND teletype
 
-# Set the default entrypoint (non overridable) to run when starting the container
-CMD ["zsh"]
-
+# Default command to run when the container is running for the first time
+CMD clear && gcloud auth login && zsh
