@@ -19,6 +19,7 @@ This image include some packages:
     zsh
     oh-my-zsh
     powerline10k zsh theme
+    zsh autocomplete for kubectl and gcloud
     ```
 
 ## Usages
@@ -34,3 +35,7 @@ docker run -ti gcloud-sdk:buster-slim
 ## Note
 
 I use the same installation tutorial from [cloud.google.com](https://cloud.google.com/sdk/docs/downloads-apt-get)
+
+## Next update
+
+- Run ```apt-get clean && apt-get autoclean``` to freed up space
