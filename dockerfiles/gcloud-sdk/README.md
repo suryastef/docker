@@ -24,12 +24,12 @@ This image include some packages:
 
 ## Usages
 
-Start the container as usual, it will prompt gcloud authentication
+Start the container, it will prompt gcloud authentication
 
 ```
-docker run -ti gcloud-sdk:buster-slim
+docker run -ti -e TERM gcloud-sdk:buster-slim
 ```
-
+Note: The ```-e TERM``` command will pass current host environment into the container
 
 
 ## Note
