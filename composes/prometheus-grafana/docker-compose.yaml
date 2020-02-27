@@ -1,0 +1,55 @@
+version: "3.7"
+
+services:
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus:/etc/prometheus
+    environment:
+      - TIMEZONE=Asia/Jakarta
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:master-ubuntu
+    container_name: grafana
+    hostname: grafana
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana:/etc/grafana/
+      - grafana-var-lib:/var/lib/grafana
+    environment:
+      - TIMEZONE=Asia/Jakarta
+    restart: unless-stopped
+
+  node-exporter:
+    image: prom/node-exporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command: 
+      - '--path.procfs=/host/proc' 
+      - '--path.sysfs=/host/sys'
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    ports:
+      - 9100:9100
+    environment:
+      - TIMEZONE=Asia/Jakarta
+    restart: unless-stopped
+
+volumes:
+  prometheus:
+  grafana:
+  grafana-var-lib:
+
