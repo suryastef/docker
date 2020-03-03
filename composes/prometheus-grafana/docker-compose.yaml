@@ -9,7 +9,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - prometheus:/etc/prometheus
+      - ./vol/prometheus:/etc/prometheus
     environment:
       - TIMEZONE=Asia/Jakarta
     restart: unless-stopped
@@ -18,6 +18,7 @@ services:
     image: grafana/grafana:master-ubuntu
     container_name: grafana
     hostname: grafana
+    user: root
     ports:
       - "80:80"
       - "443:443"
@@ -25,8 +26,8 @@ services:
     depends_on:
       - prometheus
     volumes:
-      - grafana:/etc/grafana/
-      - grafana-var-lib:/var/lib/grafana
+      - ./vol/grafana:/etc/grafana/
+      - ./vol/grafana-db:/var/lib/grafana
     environment:
       - TIMEZONE=Asia/Jakarta
     restart: unless-stopped
@@ -49,9 +50,4 @@ services:
     environment:
       - TIMEZONE=Asia/Jakarta
     restart: unless-stopped
-
-volumes:
-  prometheus:
-  grafana:
-  grafana-var-lib:
 
