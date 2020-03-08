@@ -27,10 +27,14 @@ This image include some packages:
 Start the container, it will prompt gcloud authentication
 
 ```
-docker run -ti -e TERM gcloud-sdk:buster-slim
+docker run -ti -e TERM -h gcloud-sdk --name gcloud-sdk suryastef/gcloud-sdk:buster-slim
 ```
-Note: The ```-e TERM``` command will pass current host environment into the container
 
+Note:
+
+- The `-e TERM` command will pass current host environment into the container
+- The `-h gcloud-sdk` command will set container hostname to gcloud-sdk
+- The `--name gcloud-sdk` command will set container name to gcloud-sdk
 
 ## Note
 
@@ -38,5 +42,5 @@ I use the same installation tutorial from [cloud.google.com](https://cloud.googl
 
 ## Next update
 
-- Run ```apt-get clean && apt-get autoclean``` to freed up space
+- ~~Run ```apt-get clean && apt-get autoclean``` to freed up space~~
 - Add  ```watchs``` package (same functional as watch but with color enhancement, from my repo)
