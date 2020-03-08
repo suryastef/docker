@@ -25,6 +25,9 @@ RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key -
 # Update and install the Cloud SDK
 RUN apt-get update && apt-get install -yq google-cloud-sdk kubectl
 
+# Clean apt cache
+RUN apt-get clean && apt-get autoclean
+
 # Install Oh My ZSH
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
