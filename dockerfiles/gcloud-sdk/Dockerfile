@@ -1,5 +1,5 @@
 FROM debian:buster-slim
-MAINTAINER surya@gmail.com
+MAINTAINER suryastef@gmail.com
 
 # Change Debian CLI to noninteractive important berfore running any command in debian based distro
 ENV DEBIAN_FRONTEND noninteractive
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -yq apt-utils
 RUN apt-get -yq install apt-transport-https ca-certificates gnupg --no-install-recommends
 
 # Install additional dependencies
-RUN apt-get install -yq curl vim git zsh
+RUN apt-get install -yq curl vim git zsh sudo
 
 # Add gcloud repository
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
@@ -27,6 +27,14 @@ RUN apt-get update && apt-get install -yq google-cloud-sdk kubectl
 
 # Clean apt cache
 RUN apt-get clean && apt-get autoclean
+
+# Add docker user and enable sudo without password
+RUN adduser --disabled-password --gecos '' docker
+RUN adduser docker sudo
+RUN chsh -s /bin/zsh docker
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER docker
+WORKDIR /home/docker
 
 # Install Oh My ZSH
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
