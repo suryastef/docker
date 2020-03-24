@@ -9,11 +9,13 @@ This image include some packages:
     ```
     gcloud
     kubectl
+    terraform
     ```
 
 2. Additional
 
     ```
+    sudo
     git
     vim
     zsh
