@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -yq apt-utils
 RUN apt-get -yq install apt-transport-https ca-certificates gnupg --no-install-recommends
 
 # Install additional dependencies
-RUN apt-get install -yq curl vim git zsh sudo
+RUN apt-get install -yq curl vim git zsh sudo jq wget bsdtar
 
 # Add gcloud repository
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
@@ -25,8 +25,12 @@ RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key -
 # Update and install the Cloud SDK
 RUN apt-get update && apt-get install -yq google-cloud-sdk kubectl
 
+# Install terraform
+RUN wget -qO- $(curl -sL https://releases.hashicorp.com/terraform/index.json | jq -r '.versions[].builds[].url' | egrep 'terraform_[0-9]\.[0-9]{1,2}\.[0-9]{1,2}_linux.*amd64' | sort -V | tail -1) | bsdtar -xvf- -C /usr/local/bin/
+RUN chmod +x /usr/local/bin/terraform
+
 # Clean apt cache
-RUN apt-get clean && apt-get autoclean
+RUN apt-get purge -y bsdtar jq wget && apt-get clean && apt-get autoclean
 
 # Add docker user and enable sudo without password
 RUN adduser --disabled-password --gecos '' docker
