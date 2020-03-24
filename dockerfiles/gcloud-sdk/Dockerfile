@@ -57,7 +57,7 @@ RUN echo "source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> 
 RUN git clone -q --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k
 RUN sed -i -e 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
 RUN echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >> ~/.zshrc
-RUN sed -i -e 's/(git)/(git kubectl gcloud zsh-autosuggestions)/g' ~/.zshrc
+RUN sed -i -e 's/(git)/(git kubectl gcloud terraform zsh-autosuggestions)/g' ~/.zshrc
 
 # Revert Debian CLI to teletype important berfore running any command in debian based distro
 ENV DEBIAN_FRONTEND teletype
