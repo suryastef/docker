@@ -42,8 +42,3 @@ Note:
 ## Note
 
 I use the same installation tutorial from [cloud.google.com](https://cloud.google.com/sdk/docs/downloads-apt-get)
-
-## Next update
-
-- ~~Run ```apt-get clean && apt-get autoclean``` to freed up space~~
-- Add  ```watchs``` package (same functional as watch but with color enhancement, from my repo)
