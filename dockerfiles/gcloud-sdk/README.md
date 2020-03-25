@@ -29,12 +29,13 @@ This image include some packages:
 Start the container, it will prompt gcloud authentication
 
 ```
-docker run -ti -e TERM -h gcloud-sdk --name gcloud-sdk suryastef/gcloud-sdk:buster-slim
+docker run -ti -e TERM -e TZ=Asia/Jakarta -h gcloud-sdk --name gcloud-sdk suryastef/gcloud-sdk:buster-slim
 ```
 
 Note:
 
 - The `-e TERM` command will pass current host environment into the container
+- The `-e TZ=Asia/Jakarta` command will set timezone
 - The `-h gcloud-sdk` command will set container hostname to gcloud-sdk
 - The `--name gcloud-sdk` command will set container name to gcloud-sdk
 
