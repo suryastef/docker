@@ -29,6 +29,10 @@ RUN apt-get update && apt-get install -yq google-cloud-sdk kubectl
 RUN wget -qO- $(curl -sL https://releases.hashicorp.com/terraform/index.json | jq -r '.versions[].builds[].url' | egrep 'terraform_[0-9]\.[0-9]{1,2}\.[0-9]{1,2}_linux.*amd64' | sort -V | tail -1) | bsdtar -xvf- -C /usr/local/bin/
 RUN chmod +x /usr/local/bin/terraform
 
+# Add watchs
+RUN echo "while true; do clear; date;echo;\$*;sleep 1; done" > /usr/local/bin/watchs
+RUN chmod +x /usr/local/bin/watchs
+
 # Clean apt cache
 RUN apt-get purge -y bsdtar jq wget && apt-get clean && apt-get autoclean
 
