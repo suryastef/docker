@@ -8,7 +8,7 @@ This image include some packages:
 
     ```
     gcloud
-    kubectl
+    kubectl (from asdf)
     terraform
     ```
 
@@ -19,6 +19,7 @@ This image include some packages:
     git
     vim
     zsh
+    asdf
     oh-my-zsh
     powerline10k zsh theme
     zsh autocomplete for kubectl and gcloud
