@@ -74,5 +74,11 @@ RUN asdf global kubectl 1.14.10
 # Revert Debian CLI to teletype important berfore running any command in debian based distro
 ENV DEBIAN_FRONTEND teletype
 
+# Custom volume for gcloud credential
+VOLUME /home/docker/.config/gcloud
+
+# Claim the directory
+RUN sudo chown -r docker:docker /home/docker/.config/gcloud
+
 # Default command to run when the container is running for the first time
 CMD clear && gcloud auth login && zsh
