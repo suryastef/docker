@@ -9,6 +9,7 @@ This image include some packages:
     ```
     gcloud
     kubectl (from asdf)
+    helm (from asdf)
     terraform
     ```
 

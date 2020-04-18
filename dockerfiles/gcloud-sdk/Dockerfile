@@ -62,14 +62,17 @@ RUN echo "source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> 
 RUN git clone -q --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k
 RUN sed -i -e 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
 RUN echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >> ~/.zshrc
-RUN sed -i -e 's/(git)/(git kubectl gcloud terraform zsh-autosuggestions asdf)/g' ~/.zshrc
+RUN sed -i -e 's/(git)/(git kubectl gcloud terraform zsh-autosuggestions asdf helm)/g' ~/.zshrc
 
-# Install asdf and use specific kubectl version for GKE
+# Install asdf and use specific kubectl & helm version for GKE
 RUN git clone -q https://github.com/asdf-vm/asdf.git ~/.asdf && cd ~/.asdf && git checkout -q "$(git describe --abbrev=0 --tags)"
 ENV PATH /home/docker/.asdf/bin:$PATH
 RUN asdf plugin-add kubectl
-RUN asdf install kubectl 1.14.10
-RUN asdf global kubectl 1.14.10
+RUN asdf install kubectl $(curl -sSL https://cloud.google.com/feeds/kubernetes-engine-stable-channel-release-notes.xml | grep -oE '[0-9]\.[0-9]+\.[0-9]+' | head -1)
+RUN asdf global kubectl $(asdf list kubectl)
+RUN asdf plugin-add helm
+RUN asdf install helm $(curl -sSL https://github.com/kubernetes/helm/releases | sed -n '/Latest release<\/a>/,$p' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | cut -c2-)
+RUN asdf global helm $(asdf list helm)
 
 # Revert Debian CLI to teletype important berfore running any command in debian based distro
 ENV DEBIAN_FRONTEND teletype
@@ -78,7 +81,7 @@ ENV DEBIAN_FRONTEND teletype
 VOLUME /home/docker/.config/gcloud
 
 # Claim the directory
-RUN sudo chown -r docker:docker /home/docker/.config/gcloud
+RUN sudo chown -R docker:docker /home/docker/.config/gcloud
 
 # Default command to run when the container is running for the first time
 CMD clear && gcloud auth login && zsh
