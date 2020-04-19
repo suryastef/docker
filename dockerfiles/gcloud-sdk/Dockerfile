@@ -14,8 +14,7 @@ RUN apt-get update && apt-get install -yq apt-utils
 RUN apt-get -yq install apt-transport-https ca-certificates gnupg --no-install-recommends
 
 # Install additional dependencies
-RUN apt-get install -yq curl vim git zsh sudo jq wget bsdtar watch \
-  automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev unzip
+RUN apt-get install -yq curl vim git zsh sudo watch unzip
 
 # Add gcloud repository
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
@@ -26,16 +25,12 @@ RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key -
 # Update and install the Cloud SDK
 RUN apt-get update && apt-get install -yq google-cloud-sdk
 
-# Install terraform
-RUN wget -qO- $(curl -sL https://releases.hashicorp.com/terraform/index.json | jq -r '.versions[].builds[].url' | egrep 'terraform_[0-9]\.[0-9]{1,2}\.[0-9]{1,2}_linux.*amd64' | sort -V | tail -1) | bsdtar -xvf- -C /usr/local/bin/
-RUN chmod +x /usr/local/bin/terraform
-
 # Add watchs
 RUN echo "while true; do clear; date;echo;\$*;sleep 1; done" > /usr/local/bin/watchs
 RUN chmod +x /usr/local/bin/watchs
 
 # Clean apt cache
-RUN apt-get purge -y bsdtar jq wget && apt-get clean && apt-get autoclean
+RUN apt-get clean && apt-get autoclean
 
 # Add docker user and enable sudo without password
 RUN adduser --disabled-password --gecos '' docker
@@ -73,6 +68,9 @@ RUN asdf global kubectl $(asdf list kubectl)
 RUN asdf plugin-add helm
 RUN asdf install helm $(curl -sSL https://github.com/kubernetes/helm/releases | sed -n '/Latest release<\/a>/,$p' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | cut -c2-)
 RUN asdf global helm $(asdf list helm)
+RUN asdf plugin-add terraform
+RUN asdf install terraform latest
+RUN asdf global terraform $(asdf list terraform)
 
 # Revert Debian CLI to teletype important berfore running any command in debian based distro
 ENV DEBIAN_FRONTEND teletype
