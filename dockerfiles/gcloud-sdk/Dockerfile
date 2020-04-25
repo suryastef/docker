@@ -44,7 +44,7 @@ WORKDIR /home/docker
 RUN zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Disable Oh My ZSH auto update prompt
-RUN sed -i '/DISABLE_UPDATE_PROMPT="true"/ s/./+/' ~/.zshrc
+RUN sed -i '/DISABLE_UPDATE_PROMPT="true"/ s/#\s//' ~/.zshrc
 
 # Install zsh-autosuggestion
 RUN git clone -q --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
