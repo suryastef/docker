@@ -66,10 +66,10 @@ RUN asdf plugin-add kubectl > /dev/null 2>&1
 RUN asdf install kubectl $(curl -sSL https://cloud.google.com/feeds/kubernetes-engine-stable-channel-release-notes.xml | grep -oE '[0-9]\.[0-9]+\.[0-9]+' | head -1)
 RUN asdf global kubectl $(asdf list kubectl)
 RUN asdf plugin-add helm
-RUN asdf install helm $(curl -sSL https://github.com/kubernetes/helm/releases | sed -n '/Latest release<\/a>/,$p' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | cut -c2-)
+RUN asdf install helm latest > /dev/null 2>&1
 RUN asdf global helm $(asdf list helm)
 RUN asdf plugin-add terraform
-RUN asdf install terraform latest> /dev/null 2>&1
+RUN asdf install terraform latest > /dev/null 2>&1
 RUN asdf global terraform $(asdf list terraform)
 
 # Revert Debian CLI to teletype important berfore running any command in debian based distro
