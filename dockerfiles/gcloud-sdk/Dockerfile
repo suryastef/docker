@@ -32,13 +32,8 @@ RUN chmod +x /usr/local/bin/watchs
 # Clean apt cache
 RUN apt-get clean > /dev/null 2>&1 && apt-get autoclean > /dev/null 2>&1
 
-# Add docker user and enable sudo without password
-RUN adduser --disabled-password --gecos '' docker > /dev/null 2>&1
-RUN adduser docker sudo > /dev/null 2>&1
-RUN usermod --shell /bin/zsh docker
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-USER docker
-WORKDIR /home/docker
+# Set working directory
+WORKDIR /root
 
 # Install Oh My ZSH
 RUN zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -61,7 +56,7 @@ RUN sed -i -e 's/(git)/(git kubectl gcloud terraform zsh-autosuggestions asdf he
 
 # Install asdf and use specific kubectl & helm version for GKE
 RUN git clone -q https://github.com/asdf-vm/asdf.git ~/.asdf && cd ~/.asdf && git checkout -q "$(git describe --abbrev=0 --tags)"
-ENV PATH /home/docker/.asdf/bin:$PATH
+ENV PATH /root/.asdf/bin:$PATH
 RUN asdf plugin-add kubectl > /dev/null 2>&1
 RUN asdf install kubectl $(curl -sSL https://cloud.google.com/feeds/kubernetes-engine-stable-channel-release-notes.xml | grep -oE '[0-9]\.[0-9]+\.[0-9]+' | head -1)
 RUN asdf global kubectl $(asdf list kubectl)
@@ -76,7 +71,7 @@ RUN asdf global terraform $(asdf list terraform)
 ENV DEBIAN_FRONTEND teletype
 
 # Custom volume for gcloud credential
-VOLUME /home/docker/.config/gcloud
+VOLUME /root/.config/gcloud
 
 # Default command to run when the container is running for the first time
-CMD sudo chown -R docker:docker /home/docker/.config && zsh
+CMD zsh
