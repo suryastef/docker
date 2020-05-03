@@ -67,6 +67,9 @@ RUN asdf plugin-add terraform
 RUN asdf install terraform latest > /dev/null 2>&1
 RUN asdf global terraform $(asdf list terraform)
 
+# Change default shell to ZSH
+RUN chsh -s /bin/zsh root
+
 # Revert Debian CLI to teletype important berfore running any command in debian based distro
 ENV DEBIAN_FRONTEND teletype
 
