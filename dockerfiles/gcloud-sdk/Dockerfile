@@ -6,6 +6,9 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
+# Set terminal
+ENV TERM xterm-256color
+
 # Change Debian CLI to noninteractive important berfore running any command in debian based distro
 ENV DEBIAN_FRONTEND noninteractive
 
