@@ -60,7 +60,7 @@ RUN echo "source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> 
 RUN git clone -q --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k
 RUN sed -i -e 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
 RUN echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >> ~/.zshrc
-RUN sed -i -e 's/(git)/(git kubectl gcloud terraform zsh-autosuggestions asdf helm)/g' ~/.zshrc
+RUN sed -i -e 's/(git)/(git kubectl gcloud terraform zsh-autosuggestions asdf helm tmux)/g' ~/.zshrc
 
 # Install asdf and use specific kubectl & helm version for GKE
 RUN git clone -q https://github.com/asdf-vm/asdf.git ~/.asdf && cd ~/.asdf && git checkout -q "$(git describe --abbrev=0 --tags)"
@@ -74,6 +74,19 @@ RUN asdf global helm $(asdf list helm)
 RUN asdf plugin-add terraform
 RUN asdf install terraform latest > /dev/null 2>&1
 RUN asdf global terraform $(asdf list terraform)
+
+# Install oh my tmux
+RUN curl -fsSLO https://raw.githubusercontent.com/gpakosz/.tmux/master/.tmux.conf.local
+RUN curl -fsSLO https://raw.githubusercontent.com/gpakosz/.tmux/master/.tmux.conf
+RUN sed -i '/set -g mouse on/ s/#//' ~/.tmux.conf.local
+RUN sed -i '/tmux_conf_theme_left_separator_main=/ s/#//' ~/.tmux.conf.local
+RUN sed -i '/tmux_conf_theme_left_separator_sub=/ s/#//' ~/.tmux.conf.local
+RUN sed -i '/tmux_conf_theme_right_separator_main=/ s/#//' ~/.tmux.conf.local
+RUN sed -i '/tmux_conf_theme_right_separator_sub=/ s/#//' ~/.tmux.conf.local
+RUN sed -i 's/#ffff00,#ff00af,#00afff/#aaaa00,#00aa00,#00aaaa/g' ~/.tmux.conf.local
+RUN sed -i 's/#000000,#e4e4e4,#e4e4e4/#000000,#000000,#e4e4e4/g' ~/.tmux.conf.local
+RUN sed -i 's/#8a8a8a,#e4e4e4,#000000/#8a8a8a,#aaaaaa,#000000/g' ~/.tmux.conf.local
+RUN sed -i 's/#080808,#d70000,#e4e4e4/#080808,#aa0000,#aaaaaa/g' ~/.tmux.conf.local
 
 # Change default shell to ZSH
 RUN chsh -s /bin/zsh root
