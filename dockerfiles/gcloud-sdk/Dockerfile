@@ -88,6 +88,12 @@ RUN sed -i 's/#000000,#e4e4e4,#e4e4e4/#000000,#000000,#e4e4e4/g' ~/.tmux.conf.lo
 RUN sed -i 's/#8a8a8a,#e4e4e4,#000000/#8a8a8a,#aaaaaa,#000000/g' ~/.tmux.conf.local
 RUN sed -i 's/#080808,#d70000,#e4e4e4/#080808,#aa0000,#aaaaaa/g' ~/.tmux.conf.local
 
+# Install vim-airline
+RUN git clone -q --depth=1 https://github.com/vim-airline/vim-airline ~/.vim/pack/dist/start/vim-airline
+RUN git clone -q --depth=1 https://github.com/vim-airline/vim-airline-themes ~/.vim/pack/dist/start/vim-airline-themes
+RUN git clone -q --depth=1 https://tpope.io/vim/fugitive.git ~/.vim/pack/tpope/start/fugitive
+RUN curl -fsSLO https://raw.githubusercontent.com/suryastef/dotfiles/master/home/suryastef/.vimrc
+
 # Change default shell to ZSH
 RUN chsh -s /bin/zsh root
 
