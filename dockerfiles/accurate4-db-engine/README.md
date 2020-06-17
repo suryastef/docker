@@ -5,7 +5,8 @@ Configured Firebird database engine to serve Accurate 4.2 cient
 ## Usage (server side)
 
 ```
-docker run -d --name accurate4 --net host -v ~/accurate:/accurate suryastef/accurate4-db-engine
+docker run -d --name accurate4 --net host -v ~/accurate:/accurate --restart unless-stopped suryastef/accurate4-db-engine
+podman run -d --name accurate4 --net host -v ~/accurate:/accurate --restart always --privileged suryastef/accurate4-db-engine
 ```
 
 Put database file `*.gdb` inside `/home/(username)/accurate` directory
