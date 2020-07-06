@@ -16,7 +16,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
 # install apt-utils to avoid warning
-RUN apt-get update > /dev/null 2>&1 && apt-get install -yq apt-utils > /dev/null 2>&1
+RUN apt-get update > /dev/null 2>&1 && apt-get upgrade -yq > /dev/null 2>&1 && apt-get install -yq apt-utils > /dev/null 2>&1
 
 # Make sure apt-transport-https installed
 RUN apt-get -yq install apt-transport-https ca-certificates gnupg --no-install-recommends > /dev/null 2>&1
@@ -98,6 +98,11 @@ RUN git clone -q --depth=1 https://github.com/vim-airline/vim-airline ~/.vim/pac
 RUN git clone -q --depth=1 https://github.com/vim-airline/vim-airline-themes ~/.vim/pack/dist/start/vim-airline-themes
 RUN git clone -q --depth=1 https://tpope.io/vim/fugitive.git ~/.vim/pack/tpope/start/fugitive
 RUN curl -fsSLO https://raw.githubusercontent.com/suryastef/dotfiles/master/home/suryastef/.vimrc
+
+# Install lsd
+RUN dpkg -i $(curl -sw "%{filename_effective}" -LO $(curl -s https://api.github.com/repos/Peltoche/lsd/releases | grep browser_download_url | grep '64[.]deb' | head -n 1 | cut -d '"' -f 4))
+RUN rm *.deb
+RUN echo 'alias ls="lsd"' >> .zshrc
 
 # Change default shell to ZSH
 RUN chsh -s /bin/zsh root
