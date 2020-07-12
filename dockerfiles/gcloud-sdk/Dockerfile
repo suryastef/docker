@@ -57,10 +57,12 @@ RUN git clone -q --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.
 RUN echo "source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 
 # Add install powerlevel10k theme and enable additional plugins
+COPY .p10k.zsh /root/.p10k.zsh
 RUN git clone -q --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k
 RUN sed -i -e 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
 RUN echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >> ~/.zshrc
 RUN sed -i -e 's/(git)/(git kubectl gcloud terraform zsh-autosuggestions asdf helm tmux)/g' ~/.zshrc
+RUN echo "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" >> .zshrc
 
 # Install asdf and use specific kubectl & helm version for GKE
 RUN git clone -q https://github.com/asdf-vm/asdf.git ~/.asdf && cd ~/.asdf && git checkout -q "$(git describe --abbrev=0 --tags)"
