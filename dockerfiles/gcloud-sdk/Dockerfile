@@ -114,4 +114,4 @@ ENV DEBIAN_FRONTEND teletype
 VOLUME /root/.config/gcloud
 
 # Default command to run when the container is running for the first time
-CMD zsh
+CMD tmux
