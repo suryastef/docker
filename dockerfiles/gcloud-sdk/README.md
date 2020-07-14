@@ -19,8 +19,10 @@ This image include some packages:
     sudo
     git
     vim
+    vim-airline
     tmux
     zsh
+    lsd
     asdf
     oh-my-zsh
     powerline10k zsh theme
@@ -32,7 +34,7 @@ This image include some packages:
 Start the container, it will prompt gcloud authentication:
 
 ```
-docker run -ti -e TERM -e TZ=Asia/Jakarta -h gcloud-sdk --name gcloud-sdk -v ~/.config/gcloud:/home/docker/.config/gcloud suryastef/gcloud-sdk:buster-slim
+podman run -ti -e TERM=xterm-256color -e TZ=Asia/Jakarta -h gcloud-sdk --name gcloud-sdk -v ~/.config/gcloud:/root/.config/gcloud suryastef/gcloud-sdk:buster-slim
 ```
 
 Command detail:
@@ -41,12 +43,12 @@ Command detail:
 - The `-e TZ=Asia/Jakarta` command will set timezone
 - The `-h gcloud-sdk` command will set container hostname to gcloud-sdk
 - The `--name gcloud-sdk` command will set container name to gcloud-sdk
-- The `-v ~/.config/gcloud:/home/docker/.config/gcloud` command will bind mount host path `~/.config/gcloud` for persistence storage containing gcloud credential
+- The `-v ~/.config/gcloud:/root/.config/gcloud` command will bind mount host path `~/.config/gcloud` for persistence storage containing gcloud credential
 
-Additional command (inside container):
+Rerun command:
 
 ```
-p10k configure && 
+docker start gcloud-sdk && docker exec -ti gcloud-sdk tmux
 ```
 
 ## Note
