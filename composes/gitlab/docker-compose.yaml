@@ -1,0 +1,29 @@
+gitlab:
+  image: 'gitlab/gitlab-ce:latest'
+  restart: unless-stopped
+  hostname: 'gitlab'
+  container_name: 'gitlab'
+  environment:
+    - 'TZ=Asia/Jakarta'
+    - 'GITLAB_OMNIBUS_CONFIG=external_url "http://example.com"'
+  ports:
+    - '80:80'
+    - '443:443'
+    - '22:22'
+  volumes:
+    - './vol/config:/etc/gitlab'   # Storing config files
+    - './vol/logs:/var/log/gitlab' # Storing logs
+    - './vol/data:/var/opt/gitlab' # Storing application data
+
+runner:
+  image: 'gitlab/gitlab-runner:latest'
+  restart: unless-stopped
+  hostname: 'runner'
+  container_name: 'runner'
+  environment:
+    - 'TZ=Asia/Jakarta'
+  volumes:
+    - './vol/runner:/etc/gitlab-runner' # Storing config files
+    - '/var/run/docker.sock:/var/run/docker.sock' # Connecting to docker on host
+  links:
+    - gitlab:gitlab
