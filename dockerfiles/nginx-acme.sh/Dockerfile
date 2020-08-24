@@ -1,5 +1,5 @@
 FROM nginx:alpine
-RUN apk add --no-cache openssl > /dev/null 2>&1
-RUN curl https://get.acme.sh | sh > /dev/null 2>&1
+RUN apk add --no-cache openssl
+RUN curl https://get.acme.sh | sh
 VOLUME /root/.acme.sh
 EXPOSE 443
