@@ -85,10 +85,6 @@ RUN sed -i '/tmux_conf_theme_left_separator_main=/ s/#//' ~/.tmux.conf.local
 RUN sed -i '/tmux_conf_theme_left_separator_sub=/ s/#//' ~/.tmux.conf.local
 RUN sed -i '/tmux_conf_theme_right_separator_main=/ s/#//' ~/.tmux.conf.local
 RUN sed -i '/tmux_conf_theme_right_separator_sub=/ s/#//' ~/.tmux.conf.local
-RUN sed -i 's/#ffff00,#ff00af,#00afff/#aaaa00,#00aa00,#00aaaa/g' ~/.tmux.conf.local
-RUN sed -i 's/#000000,#e4e4e4,#e4e4e4/#000000,#000000,#e4e4e4/g' ~/.tmux.conf.local
-RUN sed -i 's/#8a8a8a,#e4e4e4,#000000/#8a8a8a,#aaaaaa,#000000/g' ~/.tmux.conf.local
-RUN sed -i 's/#080808,#d70000,#e4e4e4/#080808,#aa0000,#aaaaaa/g' ~/.tmux.conf.local
 RUN sed -i '/set -gu prefix2/ s/#\s//' ~/.tmux.conf.local
 RUN sed -i '/unbind C-a/ s/#\s//' ~/.tmux.conf.local
 RUN echo 'unbind m' >> ~/.tmux.conf.local
