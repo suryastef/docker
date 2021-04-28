@@ -10,7 +10,7 @@ Bring up container and run the nginx daemon (change example.com to your register
 docker run -d --name nginx-acmesh -p 80:80 -p 443:443 -v $(pwd)/acme.sh:/root/.acme.sh suryastef/nginx-acme.sh
 ```
 
-Add your domain configuration to nginx:
+Add your domain configuration to nginx: 
 
 ```
 docker exec -ti nginx-acmesh sed -i 's/localhost;/example.com;/g' /etc/nginx/conf.d/default.conf
