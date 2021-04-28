@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+
+  web:
+    image: suryastef/nginx-certbot
+    environment:
+    - TZ=Asia/Jakarta
+    hostname: 'nginx'
+    container_name: 'nginx'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - $PWD/web:/usr/share/nginx/html
+    command: 

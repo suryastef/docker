@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+
+  web:
+    image: nginx:alpine
+    environment:
+    - TZ=Asia/Jakarta
+    hostname: 'nginx'
+    container_name: 'nginx'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - $PWD/web:/usr/share/nginx/html
