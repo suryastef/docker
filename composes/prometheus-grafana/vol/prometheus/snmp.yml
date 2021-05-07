@@ -1,0 +1,453 @@
+HOST-RESOURCEs-MIB:
+  walk:
+  - 1.3.6.1.2.1.25.2.1.2
+  - 1.3.6.1.2.1.25.2.3.1.3
+  - 1.3.6.1.2.1.25.2.3.1.5
+  - 1.3.6.1.2.1.25.2.3.1.6
+  - 1.3.6.1.2.1.25.3.2.1.3
+  - 1.3.6.1.2.1.25.3.3.1.2
+  - 1.3.6.1.2.1.25.3.7.1.4
+  - 1.3.6.1.2.1.25.4.2.1.2
+  - 1.3.6.1.2.1.25.5.1.1.1
+  - 1.3.6.1.2.1.25.5.1.1.2
+  - 1.3.6.1.2.1.25.6.3.1.2
+  - 1.3.6.1.2.1.25.6.3.1.5
+  get:
+  - 1.3.6.1.2.1.25.1.1.0
+  - 1.3.6.1.2.1.25.1.2.0
+  - 1.3.6.1.2.1.25.1.6.0
+  - 1.3.6.1.2.1.25.2.2.0
+  - 1.3.6.1.4.1.2021.11.11.0
+  - 1.3.6.1.4.1.2021.4.11.0
+  - 1.3.6.1.4.1.2021.4.5.0
+  metrics:
+  - name: hrSystemUptime
+    oid: 1.3.6.1.2.1.25.1.1
+    type: gauge
+    help: The amount of time since this host was last initialized - 1.3.6.1.2.1.25.1.1
+  - name: hrSystemDate
+    oid: 1.3.6.1.2.1.25.1.2
+    type: DateAndTime
+    help: The host's notion of the local date and time of day. - 1.3.6.1.2.1.25.1.2
+  - name: hrSystemProcesses
+    oid: 1.3.6.1.2.1.25.1.6
+    type: gauge
+    help: The number of process contexts currently loaded or running on this system.
+      - 1.3.6.1.2.1.25.1.6
+  - name: hrMemorySize
+    oid: 1.3.6.1.2.1.25.2.2
+    type: gauge
+    help: The amount of physical read-write main memory, typically RAM, contained
+      by the host. - 1.3.6.1.2.1.25.2.2
+  - name: hrStorageDescr
+    oid: 1.3.6.1.2.1.25.2.3.1.3
+    type: DisplayString
+    help: A description of the type and instance of the storage described by this
+      entry. - 1.3.6.1.2.1.25.2.3.1.3
+    indexes:
+    - labelname: hrStorageIndex
+      type: gauge
+  - name: hrStorageSize
+    oid: 1.3.6.1.2.1.25.2.3.1.5
+    type: gauge
+    help: The size of the storage represented by this entry, in units of hrStorageAllocationUnits
+      - 1.3.6.1.2.1.25.2.3.1.5
+    indexes:
+    - labelname: hrStorageIndex
+      type: gauge
+  - name: hrStorageUsed
+    oid: 1.3.6.1.2.1.25.2.3.1.6
+    type: gauge
+    help: The amount of the storage represented by this entry that is allocated, in
+      units of hrStorageAllocationUnits. - 1.3.6.1.2.1.25.2.3.1.6
+    indexes:
+    - labelname: hrStorageIndex
+      type: gauge
+  - name: hrDeviceDescr
+    oid: 1.3.6.1.2.1.25.3.2.1.3
+    type: DisplayString
+    help: A textual description of this device, including the device's manufacturer
+      and revision, and optionally, its serial number. - 1.3.6.1.2.1.25.3.2.1.3
+    indexes:
+    - labelname: hrDeviceIndex
+      type: gauge
+  - name: hrProcessorLoad
+    oid: 1.3.6.1.2.1.25.3.3.1.2
+    type: gauge
+    help: The average, over the last minute, of the percentage of time that this processor
+      was not idle - 1.3.6.1.2.1.25.3.3.1.2
+    indexes:
+    - labelname: hrDeviceIndex
+      type: gauge
+  - name: hrPartitionSize
+    oid: 1.3.6.1.2.1.25.3.7.1.4
+    type: gauge
+    help: The size of this partition. - 1.3.6.1.2.1.25.3.7.1.4
+    indexes:
+    - labelname: hrDeviceIndex
+      type: gauge
+    - labelname: hrPartitionIndex
+      type: gauge
+  - name: hrSWRunName
+    oid: 1.3.6.1.2.1.25.4.2.1.2
+    type: OctetString
+    help: A textual description of this running piece of software, including the manufacturer,
+      revision, and the name by which it is commonly known - 1.3.6.1.2.1.25.4.2.1.2
+    indexes:
+    - labelname: hrSWRunIndex
+      type: gauge
+  - name: hrSWRunPerfCPU
+    oid: 1.3.6.1.2.1.25.5.1.1.1
+    type: gauge
+    help: The number of centi-seconds of the total system's CPU resources consumed
+      by this process - 1.3.6.1.2.1.25.5.1.1.1
+    indexes:
+    - labelname: hrSWRunIndex
+      type: gauge
+  - name: hrSWRunPerfMem
+    oid: 1.3.6.1.2.1.25.5.1.1.2
+    type: gauge
+    help: The total amount of real system memory allocated to this process. - 1.3.6.1.2.1.25.5.1.1.2
+    indexes:
+    - labelname: hrSWRunIndex
+      type: gauge
+  - name: hrSWInstalledName
+    oid: 1.3.6.1.2.1.25.6.3.1.2
+    type: OctetString
+    help: A textual description of this installed piece of software, including the
+      manufacturer, revision, the name by which it is commonly known, and optionally,
+      its serial number. - 1.3.6.1.2.1.25.6.3.1.2
+    indexes:
+    - labelname: hrSWInstalledIndex
+      type: gauge
+  - name: hrSWInstalledDate
+    oid: 1.3.6.1.2.1.25.6.3.1.5
+    type: DateAndTime
+    help: The last-modification date of this application as it would appear in a directory
+      listing - 1.3.6.1.2.1.25.6.3.1.5
+    indexes:
+    - labelname: hrSWInstalledIndex
+      type: gauge
+  - name: ssCpuIdle
+    oid: 1.3.6.1.4.1.2021.11.11
+    type: gauge
+    help: The percentage of processor time spent idle, calculated over the last minute
+      - 1.3.6.1.4.1.2021.11.11
+  - name: memTotalFree
+    oid: 1.3.6.1.4.1.2021.4.11
+    type: gauge
+    help: The total amount of memory free or available for use on this host - 1.3.6.1.4.1.2021.4.11
+  - name: memTotalReal
+    oid: 1.3.6.1.4.1.2021.4.5
+    type: gauge
+    help: The total amount of real/physical memory installed on this host. - 1.3.6.1.4.1.2021.4.5
+  version: 2
+  auth:
+    community: Pr1v4t3
+IF-MIB:
+  walk:
+  - 1.3.6.1.2.1.2.2.1.10
+  - 1.3.6.1.2.1.2.2.1.11
+  - 1.3.6.1.2.1.2.2.1.12
+  - 1.3.6.1.2.1.2.2.1.13
+  - 1.3.6.1.2.1.2.2.1.14
+  - 1.3.6.1.2.1.2.2.1.15
+  - 1.3.6.1.2.1.2.2.1.16
+  - 1.3.6.1.2.1.2.2.1.17
+  - 1.3.6.1.2.1.2.2.1.18
+  - 1.3.6.1.2.1.2.2.1.19
+  - 1.3.6.1.2.1.2.2.1.2
+  - 1.3.6.1.2.1.2.2.1.20
+  - 1.3.6.1.2.1.2.2.1.21
+  - 1.3.6.1.2.1.2.2.1.4
+  - 1.3.6.1.2.1.2.2.1.5
+  - 1.3.6.1.2.1.2.2.1.6
+  - 1.3.6.1.2.1.2.2.1.8
+  metrics:
+  - name: ifInOctets
+    oid: 1.3.6.1.2.1.2.2.1.10
+    type: counter
+    help: The total number of octets received on the interface, including framing
+      characters - 1.3.6.1.2.1.2.2.1.10
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifInUcastPkts
+    oid: 1.3.6.1.2.1.2.2.1.11
+    type: counter
+    help: The number of packets, delivered by this sub-layer to a higher (sub-)layer,
+      which were not addressed to a multicast or broadcast address at this sub-layer
+      - 1.3.6.1.2.1.2.2.1.11
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifInNUcastPkts
+    oid: 1.3.6.1.2.1.2.2.1.12
+    type: counter
+    help: The number of packets, delivered by this sub-layer to a higher (sub-)layer,
+      which were addressed to a multicast or broadcast address at this sub-layer -
+      1.3.6.1.2.1.2.2.1.12
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifInDiscards
+    oid: 1.3.6.1.2.1.2.2.1.13
+    type: counter
+    help: The number of inbound packets which were chosen to be discarded even though
+      no errors had been detected to prevent their being deliverable to a higher-layer
+      protocol - 1.3.6.1.2.1.2.2.1.13
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifInErrors
+    oid: 1.3.6.1.2.1.2.2.1.14
+    type: counter
+    help: For packet-oriented interfaces, the number of inbound packets that contained
+      errors preventing them from being deliverable to a higher-layer protocol - 1.3.6.1.2.1.2.2.1.14
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifInUnknownProtos
+    oid: 1.3.6.1.2.1.2.2.1.15
+    type: counter
+    help: For packet-oriented interfaces, the number of packets received via the interface
+      which were discarded because of an unknown or unsupported protocol - 1.3.6.1.2.1.2.2.1.15
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifOutOctets
+    oid: 1.3.6.1.2.1.2.2.1.16
+    type: counter
+    help: The total number of octets transmitted out of the interface, including framing
+      characters - 1.3.6.1.2.1.2.2.1.16
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifOutUcastPkts
+    oid: 1.3.6.1.2.1.2.2.1.17
+    type: counter
+    help: The total number of packets that higher-level protocols requested be transmitted,
+      and which were not addressed to a multicast or broadcast address at this sub-layer,
+      including those that were discarded or not sent - 1.3.6.1.2.1.2.2.1.17
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifOutNUcastPkts
+    oid: 1.3.6.1.2.1.2.2.1.18
+    type: counter
+    help: The total number of packets that higher-level protocols requested be transmitted,
+      and which were addressed to a multicast or broadcast address at this sub-layer,
+      including those that were discarded or not sent - 1.3.6.1.2.1.2.2.1.18
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifOutDiscards
+    oid: 1.3.6.1.2.1.2.2.1.19
+    type: counter
+    help: The number of outbound packets which were chosen to be discarded even though
+      no errors had been detected to prevent their being transmitted - 1.3.6.1.2.1.2.2.1.19
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifDescr
+    oid: 1.3.6.1.2.1.2.2.1.2
+    type: DisplayString
+    help: A textual string containing information about the interface - 1.3.6.1.2.1.2.2.1.2
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifOutErrors
+    oid: 1.3.6.1.2.1.2.2.1.20
+    type: counter
+    help: For packet-oriented interfaces, the number of outbound packets that could
+      not be transmitted because of errors - 1.3.6.1.2.1.2.2.1.20
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifOutQLen
+    oid: 1.3.6.1.2.1.2.2.1.21
+    type: gauge
+    help: The length of the output packet queue (in packets). - 1.3.6.1.2.1.2.2.1.21
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifMtu
+    oid: 1.3.6.1.2.1.2.2.1.4
+    type: gauge
+    help: The size of the largest packet which can be sent/received on the interface,
+      specified in octets - 1.3.6.1.2.1.2.2.1.4
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifSpeed
+    oid: 1.3.6.1.2.1.2.2.1.5
+    type: gauge
+    help: An estimate of the interface's current bandwidth in bits per second - 1.3.6.1.2.1.2.2.1.5
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifPhysAddress
+    oid: 1.3.6.1.2.1.2.2.1.6
+    type: PhysAddress48
+    help: The interface's address at its protocol sub-layer - 1.3.6.1.2.1.2.2.1.6
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  - name: ifOperStatus
+    oid: 1.3.6.1.2.1.2.2.1.8
+    type: gauge
+    help: The current operational state of the interface - 1.3.6.1.2.1.2.2.1.8
+    indexes:
+    - labelname: ifIndex
+      type: gauge
+  version: 2
+  auth:
+    community: Pr1v4t3
+UPS-MIB:
+  walk:
+  - 1.3.6.1.2.1.33.1.2
+  - 1.3.6.1.2.1.33.1.3
+  - 1.3.6.1.2.1.33.1.4
+  get:
+  - 1.3.6.1.2.1.1.3.0
+  - 1.3.6.1.2.1.25.1.1.0
+  metrics:
+  - name: sysUpTime
+    oid: 1.3.6.1.2.1.1.3
+    type: gauge
+    help: The time (in hundredths of a second) since the network management portion
+      of the system was last re-initialized. - 1.3.6.1.2.1.1.3
+  - name: hrSystemUptime
+    oid: 1.3.6.1.2.1.25.1.1
+    type: gauge
+    help: The amount of time since this host was last initialized - 1.3.6.1.2.1.25.1.1
+  - name: upsBatteryStatus
+    oid: 1.3.6.1.2.1.33.1.2.1
+    type: gauge
+    help: The indication of the capacity remaining in the UPS system's batteries -
+      1.3.6.1.2.1.33.1.2.1
+  - name: upsSecondsOnBattery
+    oid: 1.3.6.1.2.1.33.1.2.2
+    type: gauge
+    help: If the unit is on battery power, the elapsed time since the UPS last switched
+      to battery power, or the time since the network management subsystem was last
+      restarted, whichever is less - 1.3.6.1.2.1.33.1.2.2
+  - name: upsEstimatedMinutesRemaining
+    oid: 1.3.6.1.2.1.33.1.2.3
+    type: gauge
+    help: An estimate of the time to battery charge depletion under the present load
+      conditions if the utility power is off and remains off, or if it were to be
+      lost and remain off. - 1.3.6.1.2.1.33.1.2.3
+  - name: upsEstimatedChargeRemaining
+    oid: 1.3.6.1.2.1.33.1.2.4
+    type: gauge
+    help: An estimate of the battery charge remaining expressed as a percent of full
+      charge. - 1.3.6.1.2.1.33.1.2.4
+  - name: upsBatteryVoltage
+    oid: 1.3.6.1.2.1.33.1.2.5
+    type: gauge
+    help: The magnitude of the present battery voltage. - 1.3.6.1.2.1.33.1.2.5
+  - name: upsBatteryCurrent
+    oid: 1.3.6.1.2.1.33.1.2.6
+    type: gauge
+    help: The present battery current. - 1.3.6.1.2.1.33.1.2.6
+  - name: upsBatteryTemperature
+    oid: 1.3.6.1.2.1.33.1.2.7
+    type: gauge
+    help: The ambient temperature at or near the UPS Battery casing. - 1.3.6.1.2.1.33.1.2.7
+  - name: upsInputLineBads
+    oid: 1.3.6.1.2.1.33.1.3.1
+    type: counter
+    help: A count of the number of times the input entered an out-of-tolerance condition
+      as defined by the manufacturer - 1.3.6.1.2.1.33.1.3.1
+  - name: upsInputNumLines
+    oid: 1.3.6.1.2.1.33.1.3.2
+    type: gauge
+    help: The number of input lines utilized in this device - 1.3.6.1.2.1.33.1.3.2
+  - name: upsInputLineIndex
+    oid: 1.3.6.1.2.1.33.1.3.3.1.1
+    type: gauge
+    help: The input line identifier. - 1.3.6.1.2.1.33.1.3.3.1.1
+    indexes:
+    - labelname: upsInputLineIndex
+      type: gauge
+  - name: upsInputFrequency
+    oid: 1.3.6.1.2.1.33.1.3.3.1.2
+    type: gauge
+    help: The present input frequency. - 1.3.6.1.2.1.33.1.3.3.1.2
+    indexes:
+    - labelname: upsInputLineIndex
+      type: gauge
+  - name: upsInputVoltage
+    oid: 1.3.6.1.2.1.33.1.3.3.1.3
+    type: gauge
+    help: The magnitude of the present input voltage. - 1.3.6.1.2.1.33.1.3.3.1.3
+    indexes:
+    - labelname: upsInputLineIndex
+      type: gauge
+  - name: upsInputCurrent
+    oid: 1.3.6.1.2.1.33.1.3.3.1.4
+    type: gauge
+    help: The magnitude of the present input current. - 1.3.6.1.2.1.33.1.3.3.1.4
+    indexes:
+    - labelname: upsInputLineIndex
+      type: gauge
+  - name: upsInputTruePower
+    oid: 1.3.6.1.2.1.33.1.3.3.1.5
+    type: gauge
+    help: The magnitude of the present input true power. - 1.3.6.1.2.1.33.1.3.3.1.5
+    indexes:
+    - labelname: upsInputLineIndex
+      type: gauge
+  - name: upsOutputSource
+    oid: 1.3.6.1.2.1.33.1.4.1
+    type: gauge
+    help: The present source of output power - 1.3.6.1.2.1.33.1.4.1
+  - name: upsOutputFrequency
+    oid: 1.3.6.1.2.1.33.1.4.2
+    type: gauge
+    help: The present output frequency. - 1.3.6.1.2.1.33.1.4.2
+  - name: upsOutputNumLines
+    oid: 1.3.6.1.2.1.33.1.4.3
+    type: gauge
+    help: The number of output lines utilized in this device - 1.3.6.1.2.1.33.1.4.3
+  - name: upsOutputLineIndex
+    oid: 1.3.6.1.2.1.33.1.4.4.1.1
+    type: gauge
+    help: The output line identifier. - 1.3.6.1.2.1.33.1.4.4.1.1
+    indexes:
+    - labelname: upsOutputLineIndex
+      type: gauge
+  - name: upsOutputVoltage
+    oid: 1.3.6.1.2.1.33.1.4.4.1.2
+    type: gauge
+    help: The present output voltage. - 1.3.6.1.2.1.33.1.4.4.1.2
+    indexes:
+    - labelname: upsOutputLineIndex
+      type: gauge
+  - name: upsOutputCurrent
+    oid: 1.3.6.1.2.1.33.1.4.4.1.3
+    type: gauge
+    help: The present output current. - 1.3.6.1.2.1.33.1.4.4.1.3
+    indexes:
+    - labelname: upsOutputLineIndex
+      type: gauge
+  - name: upsOutputPower
+    oid: 1.3.6.1.2.1.33.1.4.4.1.4
+    type: gauge
+    help: The present output true power. - 1.3.6.1.2.1.33.1.4.4.1.4
+    indexes:
+    - labelname: upsOutputLineIndex
+      type: gauge
+  - name: upsOutputPercentLoad
+    oid: 1.3.6.1.2.1.33.1.4.4.1.5
+    type: gauge
+    help: The percentage of the UPS power capacity presently being used on this output
+      line, i.e., the greater of the percent load of true power capacity and the percent
+      load of VA. - 1.3.6.1.2.1.33.1.4.4.1.5
+    indexes:
+    - labelname: upsOutputLineIndex
+      type: gauge
+  version: 2
+  auth:
+    community: Pr1v4t3
