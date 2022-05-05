@@ -23,7 +23,7 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-    - name: Build the Docker image
+    - name: Build and Tag the Docker image
       run: |
         pwd
         docker build . --file dockerfiles/remote_storage_adapter/Dockerfile -t suryastef/remote_storage_adapter:$(date +%s) -t suryastef/remote_storage_adapter:latest
