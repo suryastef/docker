@@ -28,7 +28,7 @@ jobs:
         docker build . --file dockerfiles/remote_storage_adapter/Dockerfile -t ${{secrets.DOCKER_USER}}/remote_storage_adapter:latest
 
     - name: Push image to Docker Hub
-      run: docker push $DOCKER_USER/remote_storage_adapter
+      run: docker push ${{secrets.DOCKER_USER}}/remote_storage_adapter
 
     - name: Docker logout
       run: |
