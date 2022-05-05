@@ -8,12 +8,13 @@ on:
 
 jobs:
 
-  Build and Push Docker Image:
-
+  build_and_push_image:
+    name: Build, Tag and Push Image to Docker Hub
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+
+    - name: Git Checkout
+      uses: actions/checkout@v3
 
     - name: Docker login
       env: 
@@ -21,7 +22,7 @@ jobs:
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    
+
     - name: Build the Docker image
       run: |
         pwd
