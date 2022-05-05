@@ -24,7 +24,8 @@ jobs:
     
     - name: Build the Docker image
       run: |
-        docker build ../../dockerfiles/remote_storage_adapter/ --file Dockerfile -t suryastef/remote_storage_adapter:$(date +%s) -t suryastef/remote_storage_adapter:latest
+        pwd
+        docker build . --file dockerfiles/remote_storage_adapter/Dockerfile -t suryastef/remote_storage_adapter:$(date +%s) -t suryastef/remote_storage_adapter:latest
 
     - name: Push image to Docker Hub
       run: docker push ${{secrets.DOCKER_USER}}/remote_storage_adapter
