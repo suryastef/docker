@@ -25,10 +25,10 @@ jobs:
 
     - name: Build and Tag the Docker image
       run: |
-        docker build . --file dockerfiles/remote_storage_adapter/Dockerfile -t suryastef/remote_storage_adapter:$(date +%s) -t suryastef/remote_storage_adapter:latest
+        docker build . --file dockerfiles/remote_storage_adapter/Dockerfile -t $DOCKER_USER/remote_storage_adapter:latest
 
     - name: Push image to Docker Hub
-      run: docker push ${{secrets.DOCKER_USER}}/remote_storage_adapter
+      run: docker push $DOCKER_USER/remote_storage_adapter
 
     - name: Docker logout
       run: |
