@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Remote Storage Adapter
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  build:
+  Build and Push Docker Image:
 
     runs-on: ubuntu-latest
 
