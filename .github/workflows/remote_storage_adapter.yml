@@ -30,3 +30,7 @@ jobs:
 
     - name: Push image to Docker Hub
       run: docker push ${{secrets.DOCKER_USER}}/remote_storage_adapter
+
+    - name: Docker logout
+      run: |
+        docker logout
