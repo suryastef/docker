@@ -1,4 +1,4 @@
-name: Push remote_storage_adapter
+name: Docker Image CI
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
     
     - name: Build the Docker image
       run: |
-        docker build dockerfiles/remote_storage_adapter/ --file Dockerfile -t suryastef/remote_storage_adapter:$(date +%s) -t suryastef/remote_storage_adapter:latest
+        docker build ../../dockerfiles/remote_storage_adapter/ --file Dockerfile -t suryastef/remote_storage_adapter:$(date +%s) -t suryastef/remote_storage_adapter:latest
 
     - name: Push image to Docker Hub
       run: docker push ${{secrets.DOCKER_USER}}/remote_storage_adapter
