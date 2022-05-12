@@ -23,7 +23,7 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-    - name: Build and Tag the Docker image
+    - name: Build, Tag, Push the Docker image
       run: |
         IMAGE_TAG=$(date +%Y%m%d%H%M%S)
         docker build . --file dockerfiles/remote_storage_adapter/Dockerfile -t ${{secrets.DOCKER_USER}}/remote_storage_adapter:$IMAGE_TAG
