@@ -26,7 +26,7 @@ jobs:
 
     - name: Build, Tag, Push the Docker image
       run: |
-        IMAGE_TAG=$(date +%Y%m%d%H%M%S)
+        IMAGE_TAG=$(echo $GITHUB_SHA | cut -c 1-7)
         docker build . --file dockerfiles/remote_storage_adapter/Dockerfile -t ${{secrets.DOCKER_USER}}/remote_storage_adapter:latest
         docker push ${{secrets.DOCKER_USER}}/remote_storage_adapter:latest
         docker tag ${{secrets.DOCKER_USER}}/remote_storage_adapter:latest ${{secrets.DOCKER_USER}}/remote_storage_adapter:$IMAGE_TAG
